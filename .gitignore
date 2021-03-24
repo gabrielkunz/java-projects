@@ -25,3 +25,7 @@ hs_err_pid*
 # User ignore
 test/
 test/pom.xml
+/01_window/WindowInput/nbproject/private/
+/01_window/WindowInput/build/
+/01_input_dialog/nbproject/private/
+/01_input_dialog/build/
