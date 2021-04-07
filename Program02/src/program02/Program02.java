@@ -1,8 +1,5 @@
 package program02;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class Program02 {
 
     public static void main(String[] args) {
