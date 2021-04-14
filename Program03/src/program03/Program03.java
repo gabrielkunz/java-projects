@@ -1,21 +1,24 @@
-package program02;
+package program03;
 
-public class Program02 {
+public class Program03 {
 
     public static void main(String[] args) {
-        Person person01 = new Person();
         Professor professor01 = new Professor();
+        Student student01 = new Student();
         
-        person01.setName("gabriel");
+        student01.setName("gabriel");
         try {
-            person01.setAge(81);
+            student01.setAge(23);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        student01.setRegistration(54321);
         professor01.setName("margrit    ");
         professor01.setNumberSiape(12345);
         
-        System.out.println(person01.getName());
+        System.out.println(student01.getName());
+        System.out.println(student01.getAge());
+        System.out.println(student01.getRegistration());
         System.out.println(professor01.getName());
         System.out.println(professor01.getNumberSiape());
     }

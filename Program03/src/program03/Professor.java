@@ -1,4 +1,4 @@
-package program02;
+package program03;
 
 public class Professor extends Person {
     private Integer NumberSiape;

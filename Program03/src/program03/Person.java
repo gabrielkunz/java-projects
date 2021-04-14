@@ -1,6 +1,6 @@
-package program02;
+package program03;
 
-public class Person {
+abstract public class Person {
     private String name;
     private int age;
     
