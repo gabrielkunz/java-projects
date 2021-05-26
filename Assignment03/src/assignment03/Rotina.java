@@ -7,7 +7,23 @@ public class Rotina {
         if("".equals(input)) {
             throw new Exception("String cannot be null.");
         }
-        this.output = input;
+        
+        if(input.matches(".*[áàãéèíìóòõúù].*")){
+            output = input.replace("á","a");
+            output = output.replace("à","a");
+            output = output.replace("ã","a");
+            output = output.replace("é","e");
+            output = output.replace("è","e");
+            output = output.replace("í","i");
+            output = output.replace("ì","i");
+            output = output.replace("ó","o");
+            output = output.replace("ò","o");
+            output = output.replace("õ","o");
+            output = output.replace("ú","u");
+            output = output.replace("ù","u");
+        } else {
+            output = input;
+        }
         
         return output;
     }
@@ -16,7 +32,15 @@ public class Rotina {
         if("".equals(input)) {
             throw new Exception("String cannot be null.");
         }
-        this.output = input;
+        
+        if(input.matches(".*[  ].*")){
+            output = input;
+            while(output.matches(".*[  ].*")) {
+                output = output.replace("  "," ");
+            }
+        } else {
+            output = input;
+        }
         
         return output;
     }
