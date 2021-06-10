@@ -6,7 +6,7 @@ public class Employee extends Person{
     private JobRole job_role;
     private Integer num_children;
 
-    public Employee(String name, String mothers_name, String fathers_name, String cpf) {
+    public Employee(String name, String mothers_name, String fathers_name, String cpf, String employee_id, Float base_salary, JobRole job_role, Integer num_children) {
         super(name, mothers_name, fathers_name, cpf);
         setEmployeeID(employee_id);
         setBaseSalary(base_salary);
@@ -44,5 +44,22 @@ public class Employee extends Person{
 
     public Integer getNumberOfchildren() {
         return num_children;
+    }
+
+    public String getInfo() {
+        String employee_information = "Employee Information:";
+        employee_information = employee_information + "\n\tName: " + this.getName();
+        employee_information = employee_information + "\n\tMother's name: " + this.getMothersName();
+        employee_information = employee_information + "\n\tFathers's name: " + this.getFathersName();
+        employee_information = employee_information + "\n\tCPF: " + this.getCPF();
+        employee_information = employee_information + "\n\tNumber of children under 18: " + this.getNumberOfchildren();
+        employee_information = employee_information + "\n\tID: " + this.getEmployeeID();
+        employee_information = employee_information + "\n\tBase salary: " + this.getBaseSalary();
+        employee_information = employee_information + "\n\tJob Role: " + this.getJobRole().getRoleName();
+        employee_information = employee_information + "\n\tDepartment: " + this.getJobRole().getDepartment().getDpName();
+        employee_information = employee_information + "\n\tSector: " + this.getJobRole().getDepartment().getSector().getSectorName();
+        employee_information = employee_information + "\n\tBranch: " + this.getJobRole().getDepartment().getSector().getBranch().getBranchName();
+
+        return employee_information;
     }
 }
