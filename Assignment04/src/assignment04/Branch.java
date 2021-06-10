@@ -9,7 +9,7 @@ public class Branch {
         setLocation(location);
     }
 
-    private void setBranchName(String branch_name) {
+    public void setBranchName(String branch_name) {
         this.branch_name = branch_name;
     }
 
@@ -17,7 +17,7 @@ public class Branch {
         return branch_name;
     }
 
-    private void setLocation(String location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
