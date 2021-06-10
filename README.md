@@ -14,6 +14,12 @@ Program implementing the class diagram below (in Brazilian Portuguese). Where:
 - Class Curso = for Course objects
 - Class Titulação = for Academic Title objects
 
+## Assignment03/
+Program for string manipulation.
+
+## Assignment04/
+Final assignment.
+
 ![alt text](https://raw.githubusercontent.com/gabrielkunz/java-projects/main/Assignment02/assignment02_class_diagram.png)
 
 ## Program01/
