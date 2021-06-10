@@ -1,5 +1,5 @@
 # Java Projects
- Java programs made using NetBeans IDE
+ Java programs made using NetBeans IDE (JDK 8) and VS Code (OpenJDK 11).
 
 ## Assignment01/
 Program implementing abstract classes, class inheritance and exceptions according to the diagram below:
