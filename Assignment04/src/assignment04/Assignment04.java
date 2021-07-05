@@ -14,6 +14,7 @@ public class Assignment04 {
         List<JobRole> all_job_roles = new ArrayList<>();
         List<Employee> all_employees = new ArrayList<>();
         
+        // Manual entries for testing
         Branch RS = new Branch("RS", "Porto Alegre, Rio Grande do Sul");
         all_branches.add(RS);
         
@@ -31,7 +32,7 @@ public class Assignment04 {
         all_employees.add(new Employee("Jane", "Alice", "", "123", "0111", (float) 1500, director_dstr, 2)) ;
         all_employees.add(new Employee("Michael", "Sabrina", "John", "432", "0112", (float) 900, driver_dstr, 1));
         
-        
+        // Terminal menu
         while (option != 4) {
             System.out.println("Select an option:");
             System.out.println("1 - Log new employee");
@@ -39,11 +40,17 @@ public class Assignment04 {
             System.out.println("4 - Exit");
             
             option = sc.nextInt();
+            // Clear terminal
+            System.out.print("\033[H\033[2J");
             
             switch (option) {
                 case 1:
-                    newEmployee(all_branches, all_sectors, all_departments, 
+                    try {
+                        newEmployee(all_branches, all_sectors, all_departments, 
                             all_job_roles, all_employees);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 2:
                     displayEmployees(all_employees);
@@ -52,14 +59,14 @@ public class Assignment04 {
                     break;
                     
             }
-            
         }
         
+        sc.close();
     }
     
     public static void newEmployee(List<Branch> all_branches, List<Sector> all_sectors,
             List<Department> all_departments, List<JobRole> all_job_roles, 
-            List<Employee> all_employees) {
+            List<Employee> all_employees) throws Exception {
         Scanner sc = new Scanner(System.in);
         
         String name;
@@ -75,18 +82,43 @@ public class Assignment04 {
         // Personal information
         System.out.println("Enter employee name:");
         name = sc.nextLine();
+        if (name.equals("")) {
+            throw new Exception(">> Error: Name cannot be empty.");
+        }
+
         System.out.println("Enter employee mother's name:");
         mothers_name = sc.nextLine();
+        if (mothers_name.equals("")) {
+            throw new Exception(">> Error: Mother's name cannot be empty.");
+        }
+
         System.out.println("Enter employee fathers's name (optional):");
         fathers_name = sc.nextLine();
+
         System.out.println("Enter employee CPF:");
         cpf = sc.nextLine();
+        if (!checkCPF(cpf)) {
+            throw new Exception(">> Error: Invalid CPF.");
+        }
+
         System.out.println("Enter employee ID:");
         employee_id = sc.nextLine();
-        System.out.println("Enter employee base salary");
+        if (employee_id.equals("")) {
+            throw new Exception(">> Error: ID name cannot be empty.");
+        }
+
+        System.out.println("Enter employee base salary (BRL)");
         base_salary = sc.nextFloat();
+        if (base_salary < 1000) {
+            throw new Exception(">> Error: Base salary cannot be less than 1.000 BRL");
+        }
+
+
         System.out.println("Enter employee number of children under 18:");
         num_children = sc.nextInt();
+        if (num_children < 0) {
+            num_children = 0;
+        }
         
         // Job information
         System.out.println("Select a branch:");
@@ -96,7 +128,6 @@ public class Assignment04 {
             i++;
         });
         index_branch = sc.nextInt();
-        
     }
     
     public static void displayEmployees(List<Employee> all_employees) {
@@ -105,8 +136,65 @@ public class Assignment04 {
         });
     }
     
-    public static void checkCPF(String cpf) throws Exception {
+    public static boolean checkCPF(String cpf) {
+        boolean is_cpf_valid = true;
+        char dig10, dig11;
+        int sum, i, remainder, num, weight;
+
+        if (cpf.equals("00000000000") ||
+            cpf.equals("11111111111") ||
+            cpf.equals("22222222222") || cpf.equals("33333333333") ||
+            cpf.equals("44444444444") || cpf.equals("55555555555") ||
+            cpf.equals("66666666666") || cpf.equals("77777777777") ||
+            cpf.equals("88888888888") || cpf.equals("99999999999") ||
+            (cpf.length() != 11)) {
+            is_cpf_valid = false;
+        }
+
+        try {
+            // 1st digit
+            sum = 0;
+            weight = 10;
+            for (i=0; i<9; i++) {
+                num = (int)(cpf.charAt(i) - 48);
+                sum = sum + (num * weight);
+                weight = weight - 1;
+            }
+
+            remainder = 11 - (sum % 11);
+            if ((remainder == 10) || (remainder == 11)) {
+                dig10 = '0';
+            } else {
+                dig10 = (char)(remainder + 48);
+            }
+
+            // 2nd digit
+            sum = 0;
+            weight = 11;
+            for (i=0; i<10; i++) {
+                num = (int)(cpf.charAt(i) - 48);
+                sum = sum + (num * weight);
+                weight = weight - 1;
+            }
+
+            remainder = 11 - (sum % 11);
+            if ((remainder == 10) || (remainder == 11)) {
+                dig11 = '0';
+            } else {
+                dig11 = (char)(remainder + 48);
+            }
+
+        // Verify digits
+            if ((dig10 == cpf.charAt(9)) && (dig11 == cpf.charAt(10))){
+                is_cpf_valid = true; 
+            } else {
+                is_cpf_valid = false; 
+            }
+        } catch (InputMismatchException exception) {
+                return(false);
+        }
         
+        return is_cpf_valid;
     }
     
 }
