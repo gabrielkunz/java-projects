@@ -17,9 +17,13 @@ public class Assignment04 {
         // Manual entries for testing
         Branch RS = new Branch("RS", "Porto Alegre, Rio Grande do Sul");
         all_branches.add(RS);
+        Branch SP = new Branch("SP", "Sao Paulo, Sao Paulo");
+        all_branches.add(SP);
         
         Sector LO = new Sector("Logistics", RS);
         all_sectors.add(LO);
+        Sector HR = new Sector("Human Resources", SP);
+        all_sectors.add(HR);
         
         Department distribution = new Department("Distribution Center", LO, "Distribution of goods outside the storage.");
         all_departments.add(distribution);
@@ -78,6 +82,7 @@ public class Assignment04 {
         Integer job_role;
         Integer num_children;
         Integer index_branch;
+        Integer index_sector;
         
         // Personal information
         System.out.println("Enter employee name:");
@@ -122,12 +127,24 @@ public class Assignment04 {
         
         // Job information
         System.out.println("Select a branch:");
-        all_branches.forEach(branch -> {
-            int i = 1;
-            System.out.println("\t" + i + " - " + branch.getBranchName());
-            i++;
+        all_branches.forEach(br -> {
+            System.out.println("\t" + all_branches.indexOf(br) + " - " + br.getBranchName());
         });
         index_branch = sc.nextInt();
+        if (index_branch > all_branches.size()) {
+            throw new Exception(">> Error: Invalid branch.");
+        }
+
+        System.out.println("Select a sector:");
+        all_sectors.forEach(sctr -> {
+            if (sctr.getBranch() == all_branches.get(index_branch)) {
+                System.out.println("\t" + all_sectors.indexOf(sctr) + " - " + sctr.getSectorName());
+            }
+        });
+        index_sector = sc.nextInt();
+        if (index_branch > all_branches.size()) {
+            throw new Exception(">> Error: Invalid sector.");
+        }
     }
     
     public static void displayEmployees(List<Employee> all_employees) {
