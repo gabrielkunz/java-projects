@@ -184,7 +184,9 @@ public class Assignment04 {
            }
        }
 
-       all_employees.add(new Employee(name, mothers_name, fathers_name, cpf, cnh, employee_id, base_salary, all_job_roles.get(index_job_role), num_children));
+       // Format strings
+
+       all_employees.add(new Employee(formatString(name), formatString(mothers_name), formatString(fathers_name), cpf, cnh, employee_id, base_salary, all_job_roles.get(index_job_role), num_children));
 
        return all_employees;
     }
@@ -262,5 +264,65 @@ public class Assignment04 {
 
         new_salary = (float) increase_factor * base_salary;
         return new_salary;
+    }
+
+    public static String formatString(String input) {
+        String output;
+        if (input.equals("")) {
+            output = input;
+        } else {
+            output = removeAccent(input.toLowerCase());
+            output = removeDoubleSpaces(output);
+            output = output.toUpperCase();
+        }
+
+        return output;
+    }
+
+    public static String removeAccent(String input) {
+        String output;
+
+        if(input.matches(".*[áàâãéèêíìîóòõôúùû].*")){
+            output = input.replace("á","a");
+            output = output.replace("à","a");
+            output = output.replace("ã","a");
+            output = output.replace("â","a");
+            
+            output = output.replace("é","e");
+            output = output.replace("è","e");
+            output = output.replace("ê","e");
+            
+            output = output.replace("í","i");
+            output = output.replace("ì","i");
+            output = output.replace("î","i");
+            
+            output = output.replace("ó","o");
+            output = output.replace("ò","o");
+            output = output.replace("õ","o");
+            output = output.replace("ô","o");
+            
+            output = output.replace("ú","u");
+            output = output.replace("ù","u");
+            output = output.replace("û","u");
+        } else {
+            output = input;
+        }
+        
+        return output;
+    }
+
+    public static String removeDoubleSpaces(String input) {
+        String output;
+
+        if(input.contains("  ")){
+            output = input;
+            while(output.contains("  ")) {
+                output = output.replace("  "," ");
+            }
+        } else {
+            output = input;
+        }
+        
+        return output;
     }
 }
