@@ -15,30 +15,30 @@ public class Assignment04 {
         List<Employee> all_employees = new ArrayList<>();
         
         // Manual entries for testing
-        Branch RS = new Branch("RS", "Porto Alegre, Rio Grande do Sul");
+        Branch RS = new Branch("RS", "PORTO ALEGRE, RIO GRANDE DO SUL");
         all_branches.add(RS);
-        Branch SP = new Branch("SP", "Sao Paulo, Sao Paulo");
+        Branch SP = new Branch("SP", "SAO PAULO, SAO PAULO");
         all_branches.add(SP);
         
-        Sector LO = new Sector("Logistics", RS);
+        Sector LO = new Sector("LOGISTICS", RS);
         all_sectors.add(LO);
-        Sector HR = new Sector("Human Resources", SP);
+        Sector HR = new Sector("HUMAN RESOURCES", SP);
         all_sectors.add(HR);
         
-        Department distribution = new Department("Distribution Center", LO, "Distribution of goods outside the storage.");
+        Department distribution = new Department("DISTRIBUTION CENTER", LO, "DISTRIBUTION OF GOODS OUTSIDE STORAGE.");
         all_departments.add(distribution);
         
-        JobRole director_dstr = new JobRole("Director of Distribution", distribution, false);
+        JobRole director_dstr = new JobRole("DIRECTOR OF DISTRIBUTION CENTER", distribution, false);
         all_job_roles.add(director_dstr);
-        JobRole driver_dstr = new JobRole("Distribution Driver", distribution, true);
+        JobRole driver_dstr = new JobRole("DISTRIBUTION DRIVER", distribution, true);
         all_job_roles.add(driver_dstr);
-        JobRole coordinator_dstr = new JobRole("Coordinator of Distribution", distribution, false);
+        JobRole coordinator_dstr = new JobRole("COORDINATOR OF DISTRIBUTION", distribution, false);
         all_job_roles.add(coordinator_dstr);
-        JobRole mechanic_dstr = new JobRole("Distribution Mechanic", distribution, true);
+        JobRole mechanic_dstr = new JobRole("DISTRIBUTION MECHANIC", distribution, true);
         all_job_roles.add(mechanic_dstr);
         
-        all_employees.add(new Employee("Jane", "Alice", null, "123", null, "0111", (float) 1500, director_dstr, 2)) ;
-        all_employees.add(new Employee("Michael", "Sabrina", "John", "432", "789", "0112", (float) 900, driver_dstr, 1));
+        all_employees.add(new Employee("JANE", "ALICE", null, "123", null, "0111", (float) 1500, director_dstr, 2)) ;
+        all_employees.add(new Employee("MICHAEL", "SABRINA", "JOHN", "432", "789", "0112", (float) 900, driver_dstr, 1));
         
         // Terminal menu
         while (option != 4) {
