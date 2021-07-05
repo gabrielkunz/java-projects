@@ -28,13 +28,17 @@ public class Assignment04 {
         Department distribution = new Department("Distribution Center", LO, "Distribution of goods outside the storage.");
         all_departments.add(distribution);
         
-        JobRole director_dstr = new JobRole("Director of Distribution", distribution);
+        JobRole director_dstr = new JobRole("Director of Distribution", distribution, false);
         all_job_roles.add(director_dstr);
-        JobRole driver_dstr = new Driver("Distribution Driver", distribution, "123");
+        JobRole driver_dstr = new JobRole("Distribution Driver", distribution, true);
         all_job_roles.add(driver_dstr);
+        JobRole coordinator_dstr = new JobRole("Coordinator of Distribution", distribution, false);
+        all_job_roles.add(coordinator_dstr);
+        JobRole mechanic_dstr = new JobRole("Distribution Mechanic", distribution, true);
+        all_job_roles.add(mechanic_dstr);
         
-        all_employees.add(new Employee("Jane", "Alice", "", "123", "0111", (float) 1500, director_dstr, 2)) ;
-        all_employees.add(new Employee("Michael", "Sabrina", "John", "432", "0112", (float) 900, driver_dstr, 1));
+        all_employees.add(new Employee("Jane", "Alice", null, "123", null, "0111", (float) 1500, director_dstr, 2)) ;
+        all_employees.add(new Employee("Michael", "Sabrina", "John", "432", "789", "0112", (float) 900, driver_dstr, 1));
         
         // Terminal menu
         while (option != 4) {
@@ -50,7 +54,7 @@ public class Assignment04 {
             switch (option) {
                 case 1:
                     try {
-                        newEmployee(all_branches, all_sectors, all_departments, 
+                        all_employees = newEmployee(all_branches, all_sectors, all_departments, 
                             all_job_roles, all_employees);
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
@@ -68,7 +72,7 @@ public class Assignment04 {
         sc.close();
     }
     
-    public static void newEmployee(List<Branch> all_branches, List<Sector> all_sectors,
+    public static List<Employee> newEmployee(List<Branch> all_branches, List<Sector> all_sectors,
             List<Department> all_departments, List<JobRole> all_job_roles, 
             List<Employee> all_employees) throws Exception {
         Scanner sc = new Scanner(System.in);
@@ -77,12 +81,14 @@ public class Assignment04 {
         String mothers_name;
         String fathers_name;
         String cpf;
+        String cnh = null;
         String employee_id;
         Float base_salary;
-        Integer job_role;
         Integer num_children;
         Integer index_branch;
         Integer index_sector;
+        Integer index_department;
+        Integer index_job_role;
         
         // Personal information
         System.out.println("Enter employee name:");
@@ -121,7 +127,9 @@ public class Assignment04 {
 
         System.out.println("Enter employee number of children under 18:");
         num_children = sc.nextInt();
-        if (num_children < 0) {
+        if (num_children > 0) {
+            base_salary = adjustBaseSalary(base_salary, num_children);
+        } else {
             num_children = 0;
         }
         
@@ -145,6 +153,40 @@ public class Assignment04 {
         if (index_branch > all_branches.size()) {
             throw new Exception(">> Error: Invalid sector.");
         }
+
+        System.out.println("Select a department:");
+        all_departments.forEach(dp -> {
+            if (dp.getSector() == all_sectors.get(index_sector)) {
+                System.out.println("\t" + all_departments.indexOf(dp) + " - " + dp.getDpName());
+            }
+        });
+        index_department = sc.nextInt();
+        if (index_department > all_departments.size()) {
+            throw new Exception(">> Error: Invalid department.");
+        }
+
+        System.out.println("Select a job role:");
+        all_job_roles.forEach(jr -> {
+            if (jr.getDepartment() == all_departments.get(index_department)) {
+                System.out.println("\t" + all_job_roles.indexOf(jr) + " - " + jr.getRoleName());
+            }
+        });
+        index_job_role = sc.nextInt();
+        if (index_job_role > all_job_roles.size()) {
+            throw new Exception(">> Error: Invalid job role.");
+        }
+
+       if (all_job_roles.get(index_job_role).getCNHRequired()) {
+           System.out.println("Enter employee CNH number:");
+           cnh = sc.next();
+           if (cnh.equals("")) {
+               throw new Exception("Error: Invalid CNH number.");
+           }
+       }
+
+       all_employees.add(new Employee(name, mothers_name, fathers_name, cpf, cnh, employee_id, base_salary, all_job_roles.get(index_job_role), num_children));
+
+       return all_employees;
     }
     
     public static void displayEmployees(List<Employee> all_employees) {
@@ -214,4 +256,11 @@ public class Assignment04 {
         return is_cpf_valid;
     }
     
+    public static Float adjustBaseSalary (Float base_salary, Integer num_children) {
+        Float new_salary = (float) 0;
+        Float increase_factor = (float) ((num_children * 0.05) + 1.0);
+
+        new_salary = (float) increase_factor * base_salary;
+        return new_salary;
+    }
 }
