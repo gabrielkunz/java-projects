@@ -38,7 +38,7 @@ public class Assignment04 {
         all_job_roles.add(mechanic_dstr);
         
         all_employees.add(new Employee("JANE", "ALICE", null, "123", null, "0111", (float) 1500, director_dstr, 2)) ;
-        all_employees.add(new Employee("MICHAEL", "SABRINA", "JOHN", "432", "789", "0112", (float) 900, driver_dstr, 1));
+        all_employees.add(new Employee("MICHAEL", "SABRINA", "JOHN", "432", "789", "0112", (float) 1100, driver_dstr, 1));
         
         // Terminal menu
         while (option != 4) {
