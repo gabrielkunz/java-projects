@@ -5,12 +5,14 @@ abstract public class Person {
     private String mothers_name;
     private String fathers_name;
     private String cpf;
+    private String cnh;
 
-    public Person(String name, String mothers_name, String fathers_name, String cpf) {
+    public Person(String name, String mothers_name, String fathers_name, String cpf, String cnh) {
         setName(name);
         setMothersName(mothers_name);
         setFathersName(fathers_name);
         setCPF(cpf);
+        setCNH(cnh);
     }
 
     public void setName(String name) {
@@ -43,5 +45,13 @@ abstract public class Person {
 
     public String getCPF() {
         return cpf;
+    }
+
+    public void setCNH(String cnh) {
+        this.cnh = cnh;
+    }
+
+    public String getCNH() {
+        return cnh;
     }
 }
