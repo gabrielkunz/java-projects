@@ -6,8 +6,8 @@ public class Employee extends Person{
     private JobRole job_role;
     private Integer num_children;
 
-    public Employee(String name, String mothers_name, String fathers_name, String cpf, String employee_id, Float base_salary, JobRole job_role, Integer num_children) {
-        super(name, mothers_name, fathers_name, cpf);
+    public Employee(String name, String mothers_name, String fathers_name, String cpf, String cnh, String employee_id, Float base_salary, JobRole job_role, Integer num_children) {
+        super(name, mothers_name, fathers_name, cpf, cnh);
         setEmployeeID(employee_id);
         setBaseSalary(base_salary);
         setJobRole(job_role);
@@ -52,6 +52,7 @@ public class Employee extends Person{
         employee_information = employee_information + "\n\tMother's name: " + this.getMothersName();
         employee_information = employee_information + "\n\tFathers's name: " + this.getFathersName();
         employee_information = employee_information + "\n\tCPF: " + this.getCPF();
+        employee_information = employee_information + "\n\tCNH: " + this.getCNH();
         employee_information = employee_information + "\n\tNumber of children under 18: " + this.getNumberOfchildren();
         employee_information = employee_information + "\n\tID: " + this.getEmployeeID();
         employee_information = employee_information + "\n\tBase salary: " + this.getBaseSalary();
